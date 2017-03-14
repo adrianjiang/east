@@ -257,3 +257,90 @@ E.getObjectURL = function(file) {
 E.warn = function(name,title,canshu){
 	console.warn('**********', name, title, canshu);
 }
+
+
+E.localStorage = function(){
+	
+	var num = arguments.length;
+	/*
+	 * A.localStorage(name)
+	 * */
+	if(num == 1){//璇诲彇
+		
+		var name = arguments[0];
+		try{
+		    return localStorage.getItem(name);
+	    }catch(err){
+   	 	    return mylocalStorge.getItem(name);
+	    }
+	}
+	/*
+	 * A.localStorage(name,value)
+	 * */
+	if(num == 2){//鍐欏叆
+		var name = arguments[0];
+		var value = arguments[1];
+		localStorage.setItem(name, value);
+	}
+};
+E.local = E.localStorage;
+
+
+/*
+ * rely on Hammer
+ * support event type
+ * - swipeleft - swiperight - swipeup - swipedown - tap - press
+ * */
+E.bind = function(dom, eventName, fn){
+	var hammertime = new Hammer(dom);
+	switch(eventName){
+		case 'swipeleft':break;
+		case 'swiperight':break;
+		case 'swipeup':
+			hammertime.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL});
+			break;
+		case 'swipedown':
+			hammertime.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL});
+			break;
+		case 'tap':break;
+		case 'press':break;
+		// case 'pinch'://捏合事件
+		// 	hammertime.add(new Hammer.Pinch());
+		// 	break;
+		// case 'rotate'://手指旋转
+		// 	hammertime.add(new Hammer.Rotate());
+		// 	break;
+		case 'pinchin'://捏合事件
+			hammertime.add(new Hammer.Pinch());
+			break;
+		case 'pinchout'://手指分开事件
+			hammertime.add(new Hammer.Pinch());
+			break;
+	}
+	hammertime.on(eventName, function (e) {
+		fn(e);
+    });
+}
+
+/*
+ * get the devices information
+ * */
+E.get_devices = function(){
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+    var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+    var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+    var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+//  document.writeln("您的浏览设备为：");
+    if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+        // _A_.devices = 'phone';
+        return 'phone';
+    } else {
+        // _A_.devices = 'pc';
+        return 'pc';
+    }       
+}
