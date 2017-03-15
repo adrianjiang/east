@@ -5,7 +5,9 @@
 
 E._setting = {
     system : {
-
+    	'CND': 'http://public.7east.cn/cdn/',
+    	'layui_js': 'layui/layui.js',
+    	'layui_css': 'layui/css/layui.css'
     },
     custom : {
 
@@ -87,7 +89,7 @@ E.height = function(){
 	E.include('name.js')	
 
 */
-E.include = function(url){
+E.include = function(url,callback){
 
 	var buff = url.split('.');
 	var type = buff[buff.length - 1];
@@ -99,16 +101,23 @@ E.include = function(url){
 			link.href	= url;
 			document.getElementsByTagName("head")[0].appendChild(link);
 
+			link.onload = function(){
+				if(callback)callback();
+			}
 			break;
 		case 'js':
 		    var oScript		= document.createElement("script"); 
 		    oScript.type	= "text/javascript"; 
 		    oScript.src		= url; 
 		    document.getElementsByTagName("body")[0].appendChild(oScript); 
+		    oScript.onload = function(){
+		    	if(callback)callback();
+		    }
 
 			break;
 		default :
-			console.warn('!!!!!','E.include','请传入正确的文件名',url);
+			// console.warn('!!!!!','E.include','请传入正确的文件名',url);
+			this.warn('E.include','请传入正确的文件名',url);
 	}
 };
 
@@ -255,5 +264,8 @@ E.getObjectURL = function(file) {
 
 
 E.warn = function(name,title,canshu){
-	console.warn('**********', name, title, canshu);
+	console.warn('!!!!!!!!!!', name, title, canshu);
+}
+E.success = function(title){
+	console.log('**********', title);
 }
