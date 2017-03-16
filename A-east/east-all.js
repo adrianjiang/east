@@ -19,6 +19,7 @@ require('./east/base.less');
 
 
 require('./east/image.js');
+require('./east/canvas.js');
 
 
 require('./east/init_layui.js');
