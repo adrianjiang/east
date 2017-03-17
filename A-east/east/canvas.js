@@ -92,13 +92,13 @@ E.loop_num = function(callback, num, end){
 	this.buff(name, true);
 	var _point = 0;
 	var loop = function() {
-		if(!E.buff(name) | num <= _point){
+		if(!E.buff(name) | num < _point){
 			if(end)end();
 			return;
 		}
-		_point++;
 		callback();
 		E.requestFrame.call(window, loop);
+		_point++;
 	}
 	loop();
 }
