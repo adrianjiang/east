@@ -364,7 +364,7 @@ E.get_devices = function(){
 //  document.writeln("您的浏览设备为：");
     if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
         // _A_.devices = 'phone';
-        return 'phone';
+        return 'mobile';
     } else {
         // _A_.devices = 'pc';
         return 'pc';
@@ -377,9 +377,7 @@ E.getDom_id = function(){
 
 E.getDom = function(string){
 	var buff = string[0];
-	console.log(buff,string.shift())
 	if(buff == '#'){
-
 		return document.getElementById(string.shift());
 	}
 	if(buff == '.'){

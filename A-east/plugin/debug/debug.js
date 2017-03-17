@@ -97,7 +97,8 @@ var bind1 = function(fn, me){ return function(){ return fn.apply(me, arguments);
       return css.join(";");
     };
 
-    parentBottom = 6;
+    //伸出来的长度
+    parentBottom = 10;
 
     publicCss = ["-webkit-transition: all .3s ease", "transition: all .3s ease"];
 

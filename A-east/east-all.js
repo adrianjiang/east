@@ -20,6 +20,12 @@ require('./east/base.less');
 
 require('./east/image.js');
 require('./east/canvas.js');
+require('./east/event.js');
+
+require('./east/mobile.js');
+require('./east/pc.js');
+
+
 
 
 require('./east/init_layui.js');
